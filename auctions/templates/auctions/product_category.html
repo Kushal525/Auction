@@ -1,0 +1,31 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    <form method="POST" action="{% url 'product_category' %}">
+        {% csrf_token %}
+        <select name="category">
+            <option value="select">Select</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Furniture">Furniture</option>
+            <option value="Toys">Toys</option>
+            <option value="Home">Home</option>
+        </select>
+        <input type="submit" value="submit">
+    </form>
+    <h5>Category:  {{ category }}</h5>
+    <div class="item_model">
+    {% for product in products %}
+        <div class="index_individual_product">
+            <a href="/product/{{product.product_name}}/{{product.id}}">
+                <img src="static/images/{{product.product_img}}" height="200px" width="250px" alt={{ product.product_name }}>
+            </a>
+                <h5>{{ product.product_name }}</h5>
+                <h5>Rs. {{ product.product_price }}</h5>
+                <h5>Category: {{ product.product_category }}</h5>
+        </div>
+    {% empty %}
+        <li>No Active Products</li>
+    {% endfor %}
+    </div> 
+{% endblock %}

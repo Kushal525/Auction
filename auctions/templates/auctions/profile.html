@@ -1,0 +1,36 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    <h2>Profile</h2>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    <form action="{% url 'profile' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label style="margin-right: 48px;">First Name</label><input type="text" value= {{existing_first_name}} name="first_name" >
+        </div>
+        <div class="form-group">
+            <label style="margin-right: 48px;">Last Name</label><input type="text" value= {{existing_last_name}} name="last_name" >
+        </div>
+        <div class="form-group">
+            <label style="margin-right: 78px;">Email :</label><label>  {{existing_email}} </label>
+        </div>
+        <div class="form-group">
+            <label style="margin-right: 5px;">Phone Number :</label><lable> {{existing_phone_number}}</lable>
+        </div>
+        <div class="form-group">
+            <label style="margin-right: 46px;">Birth Date :</label><label>{{existing_birth_date}}</label>
+        </div>
+        <div class="form-group">
+            <label style="margin-right: 67px;">Address</label><textarea rows="1" cols="25" name="address">{{existing_address}}</textarea>
+        </div>
+        <input style="margin-left:75px; margin-bottom: 10px;" class="btn btn-primary" type="submit" value="Update">
+    </form>
+
+    <a style="margin-left: 66px;" href="{% url 'index' %}">Bact To Home</a>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<div class="register">
+    <h2>Register</h2>
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {% if message %}
+                <div style="color:red" >{{ message }}</div>
+            {% endif %}
+            <input class="form-control" autofocus type="text" name="username" placeholder="Username" required>
+        </div>
+        <div class="form-group">
+            {% if email_message %}
+                <div style="color:red">{{ email_message }}</div>
+            {% endif %}
+            <input class="form-control" type="email" name="email" placeholder="Email Address">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password" required4>
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password" required>
+        </div>
+        <div class="form-group">
+            {% if phone_number_message %}
+                <div style="color:red">{{ phone_number_message }}</div>
+            {% endif %}
+            <input type="tel" name="phone_number" pattern="[7-9]\d{9}$" title="Enter Valid 10 digit Phone Numbers Starts with 7,8,9"  placeholder="Phone Number">
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" rows="4" cols="50" placeholder="Address" name="address"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Date Of Birth</label>
+            <input type="date" name="birth_date" placeholder="birth_date" required>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Register">
+    </form>
+
+    Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+</div>
+
+{% endblock %}

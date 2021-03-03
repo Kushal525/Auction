@@ -1,0 +1,22 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    <div class="item_model">
+    {% for product in products %}
+        <div class="index_individual_product">
+            <a href="/product/{{product.product_name}}/{{product.id}}">
+                    <img src="static/images/{{product.product_img}}" height="200px" width="250px" alt={{ product.product_name }} width="500" height="600">
+                
+            </a>
+                <h5>{{ product.product_name }}</h5>
+                <h5>Rs. {{ product.product_price }}</h5>
+                <h5>Category: {{ product.product_category }}</h5>
+            <br>
+            <br>
+        </div>
+    {% empty %}
+        <li>No Active Products</li>
+    {% endfor %}
+    </div>
+{% endblock %}

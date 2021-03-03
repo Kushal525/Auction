@@ -1,0 +1,16 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+{% if not message %}
+    <center><h1>Winner</h1></center>
+    <div class="product_winner_user">
+        <h2>User: {{biduser}}</h2>
+    </div>
+
+    <div class="product_winner_price">
+        <h3>For : {{price}}</h3>
+    </div>
+{% else %}
+    {{message}}
+{% endif %}
+{% endblock %}

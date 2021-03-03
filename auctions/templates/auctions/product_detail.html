@@ -1,0 +1,103 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    {% for product in products %}
+        <div>
+            {% if not user_owner %}
+                <!-- Watchlist -->
+                <div class="product_detail_watchlist">
+                    {% if not watchlists %}
+                        <a href="../../product_watchlist_add/{{product.id}}">Add to Watchlist <img src="/static/images/watchlist.png" height="30px" width="30px"></a>
+                    {% endif %}
+                        <!-- Check its in watchlist -->
+                        {% for watchlist in watchlists %}
+                            {% if product.id == watchlist.product.id %}
+                                <a href="../../product_watchlist_remove/{{product.id}}">Watchlisted <img src="/static/images/watchlisted.png" height="30px" width="30px"></a>
+                            {% endif %}
+                        {% endfor %}    
+                </div>
+            {% else %}
+                <h2>Your Product</h2>
+                <p>You can't add to watchlist and you can't Bid For Your Own product</h5>
+            {% endif %}
+            
+            <h2 class="product_detail_product_name">Product : {{ product.product_name }}</h2>
+            <div class="product_detail_img">
+                <img src="/static/images/{{product.product_img}}" height="400px" width="530px" alt={{ product.product_name }} width="500" height="600">
+            </div>
+            <div class="product_detail_product">
+                <h5>{{ product.product_name }}</h5>
+                <h5>Price : Rs. {{ product.product_price }}</h5>
+                <h5>Category : {{ product.product_category }}</h5>
+                
+            </div>
+
+
+            <div class="product_detail_bid">
+                <!-- To check Current Authenticated -->
+                {% if user.is_authenticated %}
+
+                    <!-- To check Current user is owner of the product -->
+                    {% if not user_owner %} 
+
+                        <!-- To check current Bid is from Current User -->
+                        {% if not bids %}
+                        <div>
+                            <a href="/../product_bid/{{product.id}}/{{bid_amount}}">
+                                <button id="product_detail_bid_amount">Bid For {{bid_amount}}</button>    
+                            </a>
+                        </div>
+                        {% else %}
+                            {% for bid in bids%}
+                                {%if bid.product.id == product.id %}
+                                    <input id="product_detail_current_bid" type="button" value="Current Bid is Yours" disabled>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        
+                    {% else %}
+                        <!-- To Product Owner Can't Bid -->
+                        <button disabled>You Can't Bid for Your Product</button>
+                    {% endif %} 
+                    
+                {% else %}
+                <label>Login To Bid And View Comments</label>
+                {% endif %}
+            </div>
+            
+            
+            <div class="product_detail_detail">
+            <h4>Details</h4>
+                <ul>
+                    <li>Listed By: {{ product.user }}</li>
+                    <li>Email : {{ product.user.email}}</li>
+                    <li>Phone Number : {{ product.user.phone_number }}</li>
+                    <li>Created On : {{ product.product_created_on }} </li>
+                </ul>
+            </div>
+
+            <!-- Comments --> 
+            <div class="product_detail_comment">
+                {% if user.is_authenticated %}
+                <h4>Comments :</h4>
+                {% for comment in comments %}
+                    {% if comment.product.product_name == product.product_name %}
+                        <strong><label class="individual_comment_user">{{comment.user}}</label> :</strong><br>
+                        <label class="individual_comment">{{comment.comment}}</label><br>
+                    {%endif%}   
+                {% endfor %}
+
+                <form action="{% url 'product_comment' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{product.id}}" name="product"><br>
+                    <textarea name="comment" cols="50" rows="2" required></textarea><br>
+                    <input type="submit" value="Comment">
+                </form>
+                {% endif %}
+            </div>
+        </div>
+
+    {% empty %}
+        <li>No Active Products</li>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>My WatchList</h2>
+    <div class="item_model">
+    {% for watchlist in watchlists %}
+        <div class="index_individual_product">
+            <a href="../product/{{watchlist.product.product_name}}/{{watchlist.product.id}}">
+                <img src="static/images/{{watchlist.product.product_img}}" height="200px" width="250px" alt={{ product.product_name }}>
+            </a>
+                <h5>{{ watchlist.product.product_name }}</h5>
+                <h5>Rs. {{ watchlist.product.product_price }}</h5>
+                <h5>Category: {{ watchlist.product.product_category }}</h5>
+                <center><a href="../product_watchlist_remove/{{watchlist.product.id}}">Remove <img src="/static/images/delete.png" height="30px" width="30px"></a></center>
+        </div>
+    {% empty %}
+        <li>No Active Products</li>
+    {% endfor %}
+    </div>
+{% endblock %}

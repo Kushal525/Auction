@@ -1,0 +1,89 @@
+body {
+    padding: 10px;
+}
+
+.register{
+    margin-left: 20px;
+}
+
+#layout_align{
+    margin-left: 120px; 
+    margin-right: 120px;
+    padding: 10px;
+}
+
+.item_model{
+    display: flex;
+    margin: 10px;
+    flex-wrap: wrap;
+}
+
+.index_individual_product{
+    border: 1px solid #15c4ca;
+    margin-top: 10px;
+    margin-right: 10px;
+    padding: 20px;
+    border-radius: 45px;
+}
+
+.individual_comment{
+    width: 35em;  
+    height: 2em;
+    margin-left: 35px;
+}
+
+.individual_comment_user{
+    margin-bottom: 10px;
+}
+
+.product_detail_watchlist{
+    margin-left: 400px; 
+    margin-bottom: -48px; 
+    margin-top: 80px;
+}
+
+.product_detail_product_name{
+    margin-left:50px; 
+    margin-top: 10px;
+}
+
+.product_detail_img{
+    margin-left:20px; 
+    margin-top: 10px;
+}
+
+.product_detail_product{
+    margin-left:20px; 
+    margin-top: 30px;
+}
+
+.product_detail_bid{
+    margin-left:20px; 
+    margin-top: 30px;
+}
+
+.product_detail_detail{
+    margin-left:20px; 
+    margin-top: 30px;
+}
+
+.product_detail_comment{
+    margin-left:20px; 
+    margin-top: 30px;
+}
+
+#product_detail_bid_amount{
+    width: 20em;
+}
+
+.product_winner_user{
+    text-align: center;
+    text-shadow: 20%;
+    margin-top: 20px;
+}
+
+.product_winner_price{
+    text-align: center;
+    margin-top: 20px;
+}
+
